@@ -16,7 +16,7 @@ b = 0.  # Damping coefficient
 
 # Initial conditions
 theta0 = 0  # Initial angle (radians)
-omega0 = 1.001*np.sqrt(4*g/L)       # Initial angular velocity (radians/s)
+omega0 = 0.5*np.sqrt(4*g/L)       # Initial angular velocity (radians/s)
 y0 = [theta0, omega0]
 
 # Time span
