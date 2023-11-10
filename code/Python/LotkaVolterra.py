@@ -16,8 +16,8 @@ rho = 1.0  # Damping coefficient
 
 # Time span
 t_start = 0.0
-t_end = 10.0
-t_step = 0.01
+t_end = 100.0
+t_step = 0.1
 t_span = np.arange(t_start, t_end, t_step)
 
 # Create subplots for animations and plots
@@ -35,9 +35,11 @@ sol = odeint(Lotka_Volterra, u0, t_span, args=(alpha_xy, alpha_yx, rho))
 x = sol[:, 0]
 y = sol[:, 1]
 
+axs[0, 0].axis('off')
+
 # Phase space trajectory
-axs[0, 1].set_xlim(0, 0)
-axs[0, 1].set_ylim(0, 0)
+axs[0, 1].set_xlim(0, 2)
+axs[0, 1].set_ylim(0, 2)
 axs[0, 1].set_xlabel(r'$x$')
 axs[0, 1].set_ylabel(r'$y$')
 phase_space_line, = axs[0, 1].plot([], [])
@@ -53,7 +55,7 @@ axs[1, 0].set_title(r'$x$ Variation over Time')
 
 # y variation over time
 axs[1, 1].set_xlim(0, t_end)
-axs[1, 1].set_ylim(0, 0)
+axs[1, 1].set_ylim(0, 2)
 axs[1, 1].set_xlabel('Time')
 axs[1, 1].set_ylabel(r'$y$')
 y_line, = axs[1, 1].plot([], [])
@@ -72,7 +74,7 @@ def animate(i):
     phase_space_line.set_data(x[:i], y[:i])
 
 # Set up the animation
-ani = FuncAnimation(fig, animate, frames=len(t_span), interval=1)
+ani = FuncAnimation(fig, animate, frames=len(t_span), interval=.1)
 
 # Show the plot
 plt.tight_layout()
