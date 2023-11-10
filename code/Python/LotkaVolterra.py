@@ -9,23 +9,20 @@ def Lotka_Volterra(u, t, alpha_xy, alpha_yx, rho):
     dydt = [x*(1-x-alpha_xy*y), rho*y*(1-y-alpha_yx*x)]
     return dydt
 
-# Parameters
-alpha_xy = 0.5  
-alpha_yx = 0.5  # Length of the pendulum (m)
-rho = 1.0  # Damping coefficient
-
 # Time span
 t_start = 0.0
-t_end = 100.0
+t_end = 50.0
 t_step = 0.1
 t_span = np.arange(t_start, t_end, t_step)
 
-# Create subplots for animations and plots
-fig, axs = plt.subplots(2, 2, figsize=(10, 8))
+# Parameters
+alpha_xy = 2  
+alpha_yx = 2  # Length of the pendulum (m)
+rho = .9  # Damping coefficient
 
 # Initial conditions
-x0 = 0.01  # Initial angle (radians)
-y0 = 0.0001       # Initial angular velocity (radians/s)
+x0 = .0001  # Initial angle (radians)
+y0 = .00022      # Initial angular velocity (radians/s)
 u0 = [x0, y0]
 
 # Solve the differential equations
@@ -35,11 +32,16 @@ sol = odeint(Lotka_Volterra, u0, t_span, args=(alpha_xy, alpha_yx, rho))
 x = sol[:, 0]
 y = sol[:, 1]
 
+
+# Create subplots for animations and plots
+fig, axs = plt.subplots(2, 2, figsize=(10, 8))
+
 axs[0, 0].axis('off')
 
 # Phase space trajectory
 axs[0, 1].set_xlim(0, 2)
 axs[0, 1].set_ylim(0, 2)
+axs[0, 1].set_aspect('equal', adjustable='box')
 axs[0, 1].set_xlabel(r'$x$')
 axs[0, 1].set_ylabel(r'$y$')
 phase_space_line, = axs[0, 1].plot([], [])
