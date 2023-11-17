@@ -12,8 +12,8 @@ def lotka_volterra(t, r, alpha, beta, rho):
     return dx, dy
 
 # Set parameter values
-alpha_init = 1.0
-beta_init = 1.0
+alpha_init = 1.5
+beta_init = 1.5
 rho_init = 1.0
 
 # Set up the grid
@@ -31,6 +31,11 @@ ax.set_ylim([-0.1, 1.3])
 
 # Plot the vector field
 quiver = ax.quiver(X, Y, X * (1 - X - beta_init * Y), rho_init * Y * (1 - Y - alpha_init * X))
+
+# Plot the steady states
+ax.plot([0, 0, 1, (1 - beta_init) / (1 - alpha_init * beta_init)],
+        [0, 1, 0, (1 - alpha_init) / (1 - alpha_init * beta_init)],
+        'o', color="C1")
 
 # Add labels and title
 ax.set_xlabel('x')
@@ -56,6 +61,15 @@ def update(val):
     beta = slider_beta.val
     rho = slider_rho.val
     quiver.set_UVC(X * (1 - X - beta * Y), rho * Y * (1 - Y - alpha * X))
+
+    # Update the positions of the steady states
+    ss1 = [0, 0]
+    ss2 = [0, 1]
+    ss3 = [1, 0]
+    ss4 = [(1 - beta) / (1 - alpha * beta), (1 - alpha) / (1 - alpha * beta)]
+
+    ax.lines[0].set_data([ss1[0], ss2[0], ss3[0], ss4[0]], [ss1[1], ss2[1], ss3[1], ss4[1]])
+
     fig.canvas.draw_idle()
 
 slider_alpha.on_changed(update)
