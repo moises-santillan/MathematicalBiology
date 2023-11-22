@@ -13,9 +13,9 @@ def model(phi, time, rotation_speed):
 # Define the parameters
 radius = 1.0  # Radius of the circle
 theta = np.linspace(0, 2 * np.pi, 100)  # Angle values from 0 to 2*pi
-time = np.linspace(0, 15, 1000)
+time = np.linspace(0, 50, 5000)
 g = 9.8  # Acceleration due to gravity (m/s^2)
-rotation_speed = .5 * np.sqrt(g / radius)
+rotation_speed = 1 * np.sqrt(g / radius)
 
 # Initial conditions
 phi0 = 3.14
