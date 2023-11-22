@@ -15,7 +15,7 @@ radius = 1.0  # Radius of the circle
 theta = np.linspace(0, 2 * np.pi, 100)  # Angle values from 0 to 2*pi
 time = np.linspace(0, 15, 1000)
 g = 9.8  # Acceleration due to gravity (m/s^2)
-rotation_speed = 1.2 * np.sqrt(g / radius)
+rotation_speed = .5 * np.sqrt(g / radius)
 
 # Initial conditions
 phi0 = 3.14
@@ -29,7 +29,7 @@ z = radius * np.sin(theta)
 y = np.zeros_like(x)  # Z-coordinate is set to 0 for all points
 
 # Create a figure with two subplots
-fig = plt.figure(figsize=(12, 6))
+fig = plt.figure(figsize=(12,6))
 
 # First subplot: 3D animation of the overdamped bead on rotating hoop
 ax1 = fig.add_subplot(121, projection='3d')
